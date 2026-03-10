@@ -16,14 +16,17 @@ const static = require("./routes/static")
  * View Engine and Templates
  *************************/
 app.set("view engine", "ejs")
-app.use(expressLaouts)
+app.use(expressLayouts)
 app.set("layout", "./layouts/layout") // not at the views root
 
 
 /* ***********************
  * Routes
  *************************/
-app.use(static)
+app.use(require("./routes/static"))
+app.get("/", function(req, res){
+  res.render("index", {title: "Home"})
+})
 
 /* ***********************
  * Local Server Information

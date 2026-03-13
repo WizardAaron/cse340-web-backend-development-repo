@@ -1,0 +1,204 @@
+/******* Change Box Model ***************/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+:root {
+  --max-width: 1000px;
+  
+  /* Color Scheme */
+
+  --shadow-grey: #272838;
+  --sky-aqua: #51D6FF;
+  --white: #fff;
+  --black: #000;
+  
+  /* Fonts */
+  --text-font: "Merriweather", serif;
+  --heading-font: "Roboto Slab", serif;
+  
+  /* Borders */
+  --border1: 1px solid var(--sky-aqua);
+  --border2: 1.5px solid var(--sky-aqua);
+  --border3: 5px solid var(--sky-aqua);
+  --border-radius-quarter: 0.25rem;
+  --border-radius-half: 0.5rem;
+  --border-radius: 1rem;
+  --border-radius2: 2rem;
+  
+  /* Font Sizes */
+  --font-base: 18px;
+  --small-font: 0.8em;
+  --large-font: 1.2em;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--text-font);
+}
+
+h1, h2, h3 {
+  font-family: var(--heading-font);
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+#wrapper {
+  background-color: var(--white);
+  padding: 10px;
+}
+
+#top-header {
+  background-color: var(--white);
+  color: var(--black);
+  padding: 10px;
+  
+  & > .siteName {
+    font-family: var(--heading-font);
+    font-size: 1.5em;
+  }
+}
+
+.navigation {
+  background-color: var(--shadow-grey);
+  border-bottom: var(--border1);
+  
+  & > ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin: 0;
+    padding: 0;
+    
+    & > li {
+      font-family: var(--text-font);
+      font-size: var(--font-base);
+      color: var(--white);
+      cursor: pointer;
+      text-align: center;
+      padding: 10px 0;
+      
+      &:hover {
+        color: var(--sky-aqua);
+      }
+    }
+  }
+}
+
+.delorean-reviews {
+  & > ul {
+    & > li {
+      margin-bottom: 15px;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.delorean-upgrades {
+  & > ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+    
+    & > li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      
+      & > img {
+        width: 100%;
+        max-width: 150px;
+        border: var(--border2);
+        border-radius: var(--border-radius-half);
+        background-color: var(--sky-aqua);
+        padding: 10px;
+      }
+      
+      & > span {
+        margin-top: 10px;
+        font-family: var(--text-font);
+      }
+    }
+  }
+}
+
+/*******************************************/
+/*********** Large Screen Styles ***********/
+/*******************************************/
+@media only screen and (min-width: 40.3rem) {
+  body {
+    background-image: url('/images/site/small_check.jpg');
+    padding: 20px;
+  }
+  
+  #wrapper {
+    border: var(--border3);
+    border-radius: var(--border-radius);
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  main {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .welcome,
+  .hero-section {
+    grid-column: 1 / -1;
+    order: 0;
+  }
+
+  .delorean-upgrades {
+    order: 1;
+  }
+
+  .delorean-reviews {
+    order: 2;
+  }
+
+  .navigation {
+    background-color: var(--shadow-grey);
+    border-bottom: var(--border1);
+    
+    & > ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      margin: 0;
+      padding: 0;
+
+      & > li {
+        font-family: var(--text-font);
+        font-size: var(--font-base);
+        color: var(--white);
+        cursor: pointer;
+        text-align: center;
+        padding: 10px 0;
+
+        &:hover {
+          color: var(--sky-aqua);
+        }
+      }
+    }
+  }
+}

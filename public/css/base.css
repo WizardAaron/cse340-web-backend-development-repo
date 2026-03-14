@@ -126,27 +126,29 @@ img {
 
 .cta-delorean {
   position: absolute;
-  left: 20px;
+  left: 10px;
   top: 50%;
   transform: translateY(-50%);
   background-color: rgba(255, 255, 255, 0.85);
-  padding: 20px;
+  padding: 10px;
   border: var(--border2);
   border-radius: var(--border-radius-half);
-  max-width: 250px;
+  max-width: 160px;
   
   & > h2 {
     margin-top: 0;
     color: var(--shadow-grey);
+    font-size: 1em;
   }
   
   & > ul {
     list-style: none;
     padding: 0;
-    margin: 15px 0;
+    margin: 8px 0;
+    font-size: 0.85em;
     
     & > li {
-      margin-bottom: 8px;
+      margin-bottom: 5px;
       color: var(--black);
     }
   }
@@ -155,10 +157,11 @@ img {
     display: inline-block;
     background-color: var(--shadow-grey);
     color: var(--white);
-    padding: 10px 20px;
+    padding: 8px 15px;
     text-decoration: none;
     border-radius: var(--border-radius-quarter);
     font-family: var(--heading-font);
+    font-size: 0.9em;
     
     &:hover {
       background-color: var(--sky-aqua);
@@ -245,6 +248,30 @@ img {
   .hero-section {
     grid-column: 1 / -1;
     order: 0;
+  }
+
+  .cta-delorean {
+    left: 20px;
+    padding: 20px;
+    max-width: 250px;
+    
+    & > h2 {
+      font-size: 1.5em;
+    }
+    
+    & > ul {
+      margin: 15px 0;
+      font-size: 1em;
+      
+      & > li {
+        margin-bottom: 8px;
+      }
+    }
+    
+    & > .button {
+      padding: 10px 20px;
+      font-size: 1em;
+    }
   }
 
   .delorean-upgrades {

@@ -90,21 +90,28 @@ img {
 .navigation > ul {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   margin: 0;
   padding: 0;
 }
 
 .navigation > ul > li {
+  margin: 0;
+  padding: 10px 0;
+}
+
+.navigation > ul > li > a {
   font-family: var(--heading-font);
   font-size: var(--font-base);
   color: var(--white);
   cursor: pointer;
   text-align: center;
+  text-decoration: none;
+  display: block;
   padding: 10px 0;
 }
 
-.navigation > ul > li:hover {
+.navigation > ul > li > a:hover {
   background-color: var(--sky-aqua);
   color: var(--shadow-grey);
   box-shadow: 0 0 0 1px var(--shadow-grey);
@@ -282,21 +289,28 @@ img {
   .navigation > ul {
     list-style: none;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     margin: 0;
     padding: 0;
   }
   
   .navigation > ul > li {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navigation > ul > li > a {
     font-family: var(--heading-font);
     font-size: var(--font-base);
     color: var(--white);
     cursor: pointer;
     text-align: center;
+    text-decoration: none;
+    display: block;
     padding: 10px 0;
   }
   
-  .navigation > ul > li:hover {
+  .navigation > ul > li > a:hover {
     background-color: var(--sky-aqua);
     color: var(--shadow-grey);
     box-shadow: 0 0 0 1px var(--shadow-grey);

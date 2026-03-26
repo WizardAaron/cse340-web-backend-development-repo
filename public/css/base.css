@@ -223,6 +223,83 @@ img {
   color: var(--sky-aqua);
 }
 
+/* Classification Vehicle Cards */
+#inv-display {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 20px;
+}
+
+#inv-display > li {
+  width: 100%;
+  max-width: 400px;
+  border: var(--border1);
+  border-radius: var(--border-radius-half);
+  overflow: hidden;
+  background-color: var(--white);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+#inv-display > li > a > img {
+  width: 100%;
+  display: block;
+  padding: 0;
+}
+
+#inv-display .namePrice {
+  padding: 0 0 15px;
+  margin-top: auto;
+}
+
+#inv-display .namePrice hr {
+  border: none;
+  border-top: var(--border1);
+  margin: 0 0 10px;
+}
+
+#inv-display .namePrice h2 {
+  margin: 0 0 5px;
+  font-family: var(--heading-font);
+  font-size: 1.1em;
+}
+
+#inv-display .namePrice h2 a {
+  color: var(--shadow-grey);
+  text-decoration: none;
+}
+
+#inv-display .namePrice h2 a:hover {
+  text-decoration: underline;
+}
+
+#inv-display .namePrice span {
+  color: var(--black);
+  font-size: 0.95em;
+}
+
+/* Vehicle Detail */
+.vehicle-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.vehicle-detail > img {
+  width: 100%;
+  border-radius: var(--border-radius-half);
+}
+
+.vehicle-info h3 {
+  margin-top: 0;
+}
+
 /*******************************************/
 /*********** Large Screen Styles ***********/
 /*******************************************/
@@ -239,7 +316,7 @@ img {
     margin: 0 auto;
   }
 
-  main {
+  main:has(.welcome) {
     grid-template-columns: 1fr 1fr;
   }
   
@@ -314,5 +391,22 @@ img {
     background-color: var(--sky-aqua);
     color: var(--shadow-grey);
     box-shadow: 0 0 0 1px var(--shadow-grey);
+  }
+
+  #inv-display > li {
+    width: 220px;
+  }
+
+  .vehicle-detail {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .vehicle-detail > img {
+    width: 50%;
+  }
+
+  .vehicle-detail .vehicle-info {
+    width: 50%;
   }
 }

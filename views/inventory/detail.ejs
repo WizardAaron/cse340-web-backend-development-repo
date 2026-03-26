@@ -1,0 +1,12 @@
+<!-- Title Creation -->
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+    res.redirect('/')
+} %>
+
+<!-- Message Block (will be added later) -->
+<%# messages() %>
+
+<!-- Inventory Items Display -->
+<%- detail %>

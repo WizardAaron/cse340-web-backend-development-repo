@@ -10,7 +10,10 @@ const utilities = require("../utilities")
 // Route to build inventory item detail view
 router.get("/detail/:inventoryID", utilities.handleErrors(invController.buildVehicleDetail))
 
-// Route ro build inventory by classification view
-router.get("/type/:classificationID", utilities.handleErrors(invController.buildByClassificationId));
+// Route to build inventory by classification view
+router.get("/type/:classificationID", utilities.handleErrors(invController.buildByClassificationId))
+
+// Route to test the error handler by throwing a 500 error
+router.get("/error", utilities.handleErrors(invController.throwError))
 
 module.exports = router;

@@ -34,4 +34,11 @@ invCont.buildVehicleDetail = async function (req, res, next) {
     })
 }
 
+/* ***************************
+ * Function that throws a 500 error to test the error handler
+ * ************************** */
+invCont.throwError = async function (req, res, next) {
+    throw new Error("This is a test error.")
+}
+
 module.exports = invCont

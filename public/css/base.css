@@ -296,8 +296,9 @@ img {
   border-radius: var(--border-radius-half);
 }
 
-.vehicle-info h3 {
+.vehicle-info h2 {
   margin-top: 0;
+  font-size: 1.17em;
 }
 
 /*******************************************/

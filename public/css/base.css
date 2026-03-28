@@ -11,6 +11,7 @@
   /* Color Scheme */
 
   --shadow-grey: #272838;
+  --light-grey: #E0E0E0;
   --sky-aqua: #51D6FF;
   --white: #fff;
   --black: #000;
@@ -301,6 +302,62 @@ img {
   font-size: 1.17em;
 }
 
+/* Login Form */
+#login-form {
+  max-width: 400px;
+  padding: 20px 20px 0px 20px;
+  border: var(--border2);
+  border-radius: var(--border-radius-half);
+  background-color: var(--light-grey);
+  margin: 0 auto;
+}
+
+#login-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#login-form form label {
+  font-family: var(--heading-font);
+  font-weight: bold;
+}
+
+#login-form form input {
+  padding: 10px;
+  font-size: 1em;
+  border: var(--border2);
+  border-radius: var(--border-radius-quarter);
+}
+
+#login-form form button {
+  padding: 10px;
+  font-size: 1em;
+  font-family: var(--heading-font);
+  background-color: var(--shadow-grey);
+  color: var(--white);
+  border: var(--border2);
+  border-radius: var(--border-radius2);
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+#login-form form button:hover {
+  background-color: var(--sky-aqua);
+  color: var(--shadow-grey);
+  box-shadow: 0 0 0 1px var(--shadow-grey);
+}
+
+#login-form p {
+  text-align: center;
+  margin-top: 15px;
+}
+
+#login-form p a {
+  color: var(--shadow-grey);
+  font-weight: bold;
+}
+
 /*******************************************/
 /*********** Large Screen Styles ***********/
 /*******************************************/
@@ -409,5 +466,9 @@ img {
 
   .vehicle-detail .vehicle-info {
     width: 50%;
+  }
+
+  #login-form {
+    width: 100%;
   }
 }

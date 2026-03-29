@@ -358,6 +358,78 @@ img {
   font-weight: bold;
 }
 
+/* Registration Form */
+#registration-form {
+  max-width: 400px;
+  padding: 20px;
+  border: var(--border2);
+  border-radius: var(--border-radius-half);
+  background-color: var(--light-grey);
+  margin: 0 auto;
+}
+
+#registration-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#registration-form form label {
+  font-family: var(--heading-font);
+  font-weight: bold;
+}
+
+#registration-form form input {
+  padding: 10px;
+  font-size: 1em;
+  border: var(--border2);
+  border-radius: var(--border-radius-quarter);
+}
+
+#registration-form .password-requirements {
+  font-size: var(--small-font);
+  font-style: italic;
+}
+
+#registration-form .password-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+#registration-form .password-wrapper input {
+  flex: 1;
+}
+
+#registration-form .password-wrapper button {
+  padding: 10px;
+  font-size: 0.85em;
+  font-family: var(--heading-font);
+  background-color: var(--white);
+  color: var(--shadow-grey);
+  border: var(--border2);
+  border-radius: var(--border-radius-quarter);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#registration-form form > button {
+  padding: 10px;
+  font-size: 1em;
+  font-family: var(--heading-font);
+  background-color: var(--shadow-grey);
+  color: var(--white);
+  border: var(--border2);
+  border-radius: var(--border-radius2);
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+#registration-form form > button:hover {
+  background-color: var(--sky-aqua);
+  color: var(--shadow-grey);
+  box-shadow: 0 0 0 1px var(--shadow-grey);
+}
+
 /*******************************************/
 /*********** Large Screen Styles ***********/
 /*******************************************/

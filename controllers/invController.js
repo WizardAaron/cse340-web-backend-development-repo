@@ -35,6 +35,17 @@ invCont.buildVehicleDetail = async function (req, res, next) {
 }
 
 /* ***************************
+ *  Build inventory management view
+ * ************************** */
+invCont.buildManagement = async function (req, res, next) {
+    let nav = await utilities.getNav()
+    res.render("./inventory/management", {
+        title: "Vehicle Management",
+        nav,
+    })
+}
+
+/* ***************************
  * Function that throws a 500 error to test the error handler
  * ************************** */
 invCont.throwError = async function (req, res, next) {

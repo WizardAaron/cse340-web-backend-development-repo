@@ -7,6 +7,9 @@ const utilities = require("../utilities")
 /* ***************************
  *  Inventory Routes
  * ************************** */
+// Route to build inventory management view
+router.get("/", utilities.handleErrors(invController.buildManagement))
+
 // Route to build inventory item detail view
 router.get("/detail/:inventoryID", utilities.handleErrors(invController.buildVehicleDetail))
 

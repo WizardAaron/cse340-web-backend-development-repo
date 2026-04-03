@@ -430,6 +430,72 @@ img {
   box-shadow: 0 0 0 1px var(--shadow-grey);
 }
 
+/* Add Classification Form */
+#add-classification-form,
+#add-inventory-form {
+  max-width: 400px;
+  padding: 20px;
+  border: var(--border2);
+  border-radius: var(--border-radius-half);
+  background-color: var(--light-grey);
+  margin: 0 auto;
+}
+
+#add-classification-form form,
+#add-inventory-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#add-classification-form form label,
+#add-inventory-form form label {
+  font-family: var(--heading-font);
+  font-weight: bold;
+}
+
+#add-classification-form form input,
+#add-inventory-form form input,
+#add-inventory-form form textarea,
+#add-inventory-form form select {
+  padding: 10px;
+  font-size: 1em;
+  border: var(--border2);
+  border-radius: var(--border-radius-quarter);
+}
+
+#add-inventory-form form textarea {
+  resize: vertical;
+  min-height: 80px;
+  font-family: var(--text-font);
+}
+
+#add-classification-form form button,
+#add-inventory-form form button {
+  padding: 10px;
+  font-size: 1em;
+  font-family: var(--heading-font);
+  background-color: var(--shadow-grey);
+  color: var(--white);
+  border: var(--border2);
+  border-radius: var(--border-radius2);
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+#add-classification-form form button:hover,
+#add-inventory-form form button:hover {
+  background-color: var(--sky-aqua);
+  color: var(--shadow-grey);
+  box-shadow: 0 0 0 1px var(--shadow-grey);
+}
+
+#add-classification-form p {
+  font-size: var(--small-font);
+  font-style: italic;
+  margin-top: 0;
+}
+
 /*******************************************/
 /*********** Large Screen Styles ***********/
 /*******************************************/
@@ -542,5 +608,24 @@ img {
 
   #login-form {
     width: 100%;
+  }
+
+  #add-inventory-form {
+    max-width: 600px;
+  }
+
+  #add-inventory-form form {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px 15px;
+    align-items: center;
+  }
+
+  #add-inventory-form form label {
+    text-align: right;
+  }
+
+  #add-inventory-form form button {
+    grid-column: 1 / -1;
   }
 }

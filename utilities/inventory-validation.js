@@ -44,7 +44,10 @@ validate.inventoryRules = () => {
     return [
         body("classification_id")
         .notEmpty()
-        .withMessage("Please choose a classification."),
+        .withMessage("Please choose a classification.")
+        .bail()
+        .isInt()
+        .withMessage("Invalid classification."),
 
         body("inv_make")
         .trim()

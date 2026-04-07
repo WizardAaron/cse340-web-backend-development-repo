@@ -34,11 +34,26 @@ async function buildRegister(req, res, next) {
 async function registerAccount(req, res) {
     let nav = await utilities.getNav()
     const { account_firstname, account_lastname, account_email, account_password } = req.body
+
+    // Hash the password before storing
+    let hashedPassword
+    try {
+        hashedPassword = await bcrypt.hashSync(account_password, 10)
+    } catch (error) {
+        req.flash("notice", "Sorry, there was an error processing the registration.")
+        res.status(500).render("account/register", {
+            title: "Registration",
+            nav,
+            errors: null,
+        })
+        return
+    }
+
     const regResult = await accountModel.registerAccount(
         account_firstname,
         account_lastname,
         account_email,
-        account_password
+        hashedPassword
     )
     if(regResult) {
         req.flash(
@@ -101,4 +116,16 @@ async function accountLogin(req, res) {
     }
 }
 
-module.exports = { buildLogin, buildRegister, registerAccount, accountLogin }
+/* ****************************************
+ *  Deliver account management view
+ * *************************************** */
+async function buildAccountManagement(req, res, next) {
+    let nav = await utilities.getNav()
+    res.render("account/management", {
+        title: "Account Management",
+        nav,
+        errors: null,
+    })
+}
+
+module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccountManagement }

@@ -39,6 +39,20 @@ router.get("/detail/:inventoryID", utilities.handleErrors(invController.buildVeh
 // Route to build inventory by classification view
 router.get("/type/:classificationID", utilities.handleErrors(invController.buildByClassificationId))
 
+// Route to return inventory by classification as JSON
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+
+// Route to build edit inventory view
+router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView))
+
+// Process the update inventory form
+router.post(
+  "/update/",
+  invValidate.inventoryRules(),
+  invValidate.checkUpdateData,
+  utilities.handleErrors(invController.updateInventory)
+)
+
 // Route to test the error handler by throwing a 500 error
 router.get("/error", utilities.handleErrors(invController.throwError))
 

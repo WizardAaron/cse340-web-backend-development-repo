@@ -432,7 +432,8 @@ img {
 
 /* Add Classification Form */
 #add-classification-form,
-#add-inventory-form {
+#add-inventory-form,
+#edit-inventory-form {
   max-width: 400px;
   padding: 20px;
   border: var(--border2);
@@ -442,36 +443,43 @@ img {
 }
 
 #add-classification-form form,
-#add-inventory-form form {
+#add-inventory-form form,
+#edit-inventory-form form {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
 #add-classification-form form label,
-#add-inventory-form form label {
+#add-inventory-form form label,
+#edit-inventory-form form label {
   font-family: var(--heading-font);
   font-weight: bold;
 }
 
 #add-classification-form form input,
 #add-inventory-form form input,
+#edit-inventory-form form input,
 #add-inventory-form form textarea,
-#add-inventory-form form select {
+#edit-inventory-form form textarea,
+#add-inventory-form form select,
+#edit-inventory-form form select {
   padding: 10px;
   font-size: 1em;
   border: var(--border2);
   border-radius: var(--border-radius-quarter);
 }
 
-#add-inventory-form form textarea {
+#add-inventory-form form textarea,
+#edit-inventory-form form textarea {
   resize: vertical;
   min-height: 80px;
   font-family: var(--text-font);
 }
 
 #add-classification-form form button,
-#add-inventory-form form button {
+#add-inventory-form form button,
+#edit-inventory-form form button {
   padding: 10px;
   font-size: 1em;
   font-family: var(--heading-font);
@@ -484,10 +492,23 @@ img {
 }
 
 #add-classification-form form button:hover,
-#add-inventory-form form button:hover {
+#add-inventory-form form button:hover,
+#edit-inventory-form form button:hover {
   background-color: var(--sky-aqua);
   color: var(--shadow-grey);
   box-shadow: 0 0 0 1px var(--shadow-grey);
+}
+
+#edit-inventory-form form button:disabled {
+  background-color: #999;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+#edit-inventory-form form button:disabled:hover {
+  background-color: #999;
+  color: #ccc;
+  box-shadow: none;
 }
 
 #add-classification-form p {
@@ -610,22 +631,26 @@ img {
     width: 100%;
   }
 
-  #add-inventory-form {
+  #add-inventory-form,
+  #edit-inventory-form {
     max-width: 600px;
   }
 
-  #add-inventory-form form {
+  #add-inventory-form form,
+  #edit-inventory-form form {
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 10px 15px;
     align-items: center;
   }
 
-  #add-inventory-form form label {
+  #add-inventory-form form label,
+  #edit-inventory-form form label {
     text-align: right;
   }
 
-  #add-inventory-form form button {
+  #add-inventory-form form button,
+  #edit-inventory-form form button {
     grid-column: 1 / -1;
   }
 }

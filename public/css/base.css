@@ -430,10 +430,102 @@ img {
   box-shadow: 0 0 0 1px var(--shadow-grey);
 }
 
+/* Account Update and Change Password Forms */
+#account-update-form,
+#change-password-form {
+  max-width: 400px;
+  padding: 20px;
+  border: var(--border2);
+  border-radius: var(--border-radius-half);
+  background-color: var(--light-grey);
+  margin: 0 auto 20px auto;
+  overflow: hidden;
+  justify-self: center;
+  width: 100%;
+}
+
+#account-update-form h2,
+#change-password-form h2 {
+  margin-top: 0;
+}
+
+#account-update-form form,
+#change-password-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+#account-update-form form label,
+#change-password-form form label {
+  font-family: var(--heading-font);
+  font-weight: bold;
+}
+
+#account-update-form form input,
+#change-password-form form input {
+  padding: 10px;
+  font-size: 1em;
+  border: var(--border2);
+  border-radius: var(--border-radius-quarter);
+}
+
+#change-password-form .password-info {
+  font-size: var(--small-font);
+  font-style: italic;
+  margin: 0 0 5px 0;
+}
+
+#change-password-form .password-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+#change-password-form .password-wrapper input {
+  flex: 1;
+  min-width: 0;
+}
+
+#change-password-form .password-wrapper button {
+  padding: 10px;
+  font-size: 0.85em;
+  font-family: var(--heading-font);
+  background-color: var(--white);
+  color: var(--shadow-grey);
+  border: var(--border2);
+  border-radius: var(--border-radius-quarter);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#account-update-form form > button,
+#change-password-form form > button {
+  padding: 10px;
+  font-size: 1em;
+  font-family: var(--heading-font);
+  background-color: var(--shadow-grey);
+  color: var(--white);
+  border: var(--border2);
+  border-radius: var(--border-radius2);
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+#account-update-form form > button:hover,
+#change-password-form form > button:hover {
+  background-color: var(--sky-aqua);
+  color: var(--shadow-grey);
+  box-shadow: 0 0 0 1px var(--shadow-grey);
+}
+
 /* Add Classification Form */
 #add-classification-form,
 #add-inventory-form,
-#edit-inventory-form {
+#edit-inventory-form,
+#delete-inventory-form {
   max-width: 400px;
   padding: 20px;
   border: var(--border2);
@@ -444,7 +536,8 @@ img {
 
 #add-classification-form form,
 #add-inventory-form form,
-#edit-inventory-form form {
+#edit-inventory-form form,
+#delete-inventory-form form {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -452,7 +545,8 @@ img {
 
 #add-classification-form form label,
 #add-inventory-form form label,
-#edit-inventory-form form label {
+#edit-inventory-form form label,
+#delete-inventory-form form label {
   font-family: var(--heading-font);
   font-weight: bold;
 }
@@ -460,6 +554,7 @@ img {
 #add-classification-form form input,
 #add-inventory-form form input,
 #edit-inventory-form form input,
+#delete-inventory-form form input,
 #add-inventory-form form textarea,
 #edit-inventory-form form textarea,
 #add-inventory-form form select,
@@ -479,7 +574,8 @@ img {
 
 #add-classification-form form button,
 #add-inventory-form form button,
-#edit-inventory-form form button {
+#edit-inventory-form form button,
+#delete-inventory-form form button {
   padding: 10px;
   font-size: 1em;
   font-family: var(--heading-font);
@@ -493,7 +589,8 @@ img {
 
 #add-classification-form form button:hover,
 #add-inventory-form form button:hover,
-#edit-inventory-form form button:hover {
+#edit-inventory-form form button:hover,
+#delete-inventory-form form button:hover {
   background-color: var(--sky-aqua);
   color: var(--shadow-grey);
   box-shadow: 0 0 0 1px var(--shadow-grey);
@@ -632,12 +729,18 @@ img {
   }
 
   #add-inventory-form,
-  #edit-inventory-form {
+  #edit-inventory-form,
+  #delete-inventory-form,
+  #account-update-form,
+  #change-password-form {
     max-width: 600px;
   }
 
   #add-inventory-form form,
-  #edit-inventory-form form {
+  #edit-inventory-form form,
+  #delete-inventory-form form,
+  #account-update-form form,
+  #change-password-form form {
     display: grid;
     grid-template-columns: auto 1fr;
     gap: 10px 15px;
@@ -645,12 +748,27 @@ img {
   }
 
   #add-inventory-form form label,
-  #edit-inventory-form form label {
+  #edit-inventory-form form label,
+  #delete-inventory-form form label,
+  #account-update-form form label,
+  #change-password-form form label {
     text-align: right;
   }
 
   #add-inventory-form form button,
-  #edit-inventory-form form button {
+  #edit-inventory-form form button,
+  #delete-inventory-form form button,
+  #account-update-form form > button,
+  #change-password-form form > button {
+    grid-column: 1 / -1;
+  }
+
+  #change-password-form .password-wrapper {
+    grid-column: 1 / -1;
+    flex-direction: row;
+  }
+
+  #change-password-form .password-info {
     grid-column: 1 / -1;
   }
 }

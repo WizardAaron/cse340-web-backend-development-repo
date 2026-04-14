@@ -38,6 +38,9 @@ router.post(
 // Route to build inventory item detail view
 router.get("/detail/:inventoryID", utilities.handleErrors(invController.buildVehicleDetail))
 
+// Route to build all vehicles view
+router.get("/type/all", utilities.handleErrors(invController.buildAllVehicles))
+
 // Route to build inventory by classification view
 router.get("/type/:classificationID", utilities.handleErrors(invController.buildByClassificationId))
 

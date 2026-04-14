@@ -26,6 +26,22 @@ async function getInventoryByClassificationId(classification_id) {
 }
 
 /* ***************************
+ *  Get all inventory items with classification_name (for All Vehicles page)
+ * ************************** */
+async function getAllInventoryWithClassification() {
+    try {
+        const data = await pool.query(
+            `SELECT * FROM public.inventory AS i
+            JOIN public.classification AS c
+            ON i.classification_id = c.classification_id`
+        )
+        return data.rows
+    } catch (error) {
+        console.error("getAllInventoryWithClassification error: " + error)
+    }
+}
+
+/* ***************************
  *  Get inventory item by inventory_id
  * ************************** */
 async function getInventoryById(inventory_id) {
@@ -55,7 +71,6 @@ async function addClassification(classification_name) {
         return null
     }
 }
-
 
 /* ***************************
  *  Add new inventory item
@@ -97,4 +112,4 @@ async function deleteInventoryItem(inv_id) {
     }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryById, addClassification, addInventory, updateInventory, deleteInventoryItem};
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryById, addClassification, addInventory, updateInventory, deleteInventoryItem, getAllInventoryWithClassification};

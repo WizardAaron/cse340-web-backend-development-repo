@@ -4,6 +4,20 @@ const utilities = require("../utilities")
 const invCont = {}
 
 /* ***************************
+ *  Build all vehicles view (All Vehicles classification)
+ * ************************** */
+invCont.buildAllVehicles = async function (req, res, next) {
+  const data = await invModel.getAllInventoryWithClassification()
+  const grid = await utilities.buildClassificationGrid(data)
+  let nav = await utilities.getNav()
+  res.render("./inventory/classification", {
+    title: "All Vehicles",
+    nav,
+    grid,
+  })
+}
+
+/* ***************************
  *  Build inventory by classification view
  * ************************** */
 invCont.buildByClassificationId = async function (req, res, next) {

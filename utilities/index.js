@@ -8,9 +8,11 @@ const Util = {}
  ************************** */
 Util.getNav = async function (req, res, next) {
     let data = await invModel.getClassifications()
-    console.log(data)
     let list = "<ul>"
     list += '<li><a href="/" title="Home page">Home</a></li>'
+    // Insert All Vehicles link after Home
+    list += '<li><a href="/inv/type/all" title="See all vehicles">All Vehicles</a></li>'
+    // Add the rest of the classifications
     data.rows.forEach((row) => {
         list += "<li>"
         list +=

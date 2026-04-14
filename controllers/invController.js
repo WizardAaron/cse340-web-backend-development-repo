@@ -7,7 +7,19 @@ const invCont = {}
  *  Build all vehicles view (All Vehicles classification)
  * ************************** */
 invCont.buildAllVehicles = async function (req, res, next) {
-  const data = await invModel.getAllInventoryWithClassification()
+  // Parse sort/filter params from query string
+  const order = req.query.order || "newest_listing";
+  const enablePrice = req.query.enablePrice === "on";
+  const minPrice = enablePrice ? parseFloat(req.query.minPrice) : null;
+  const maxPrice = enablePrice ? parseFloat(req.query.maxPrice) : null;
+  const enableMiles = req.query.enableMiles === "on";
+  const minMiles = enableMiles ? parseInt(req.query.minMiles) : null;
+  const maxMiles = enableMiles ? parseInt(req.query.maxMiles) : null;
+
+  // TODO: Pass these params to the model (to be implemented)
+  const data = await invModel.getAllInventoryWithClassification({
+    order, minPrice, maxPrice, minMiles, maxMiles
+  });
   const grid = await utilities.buildClassificationGrid(data)
   let nav = await utilities.getNav()
   res.render("./inventory/classification", {
@@ -21,16 +33,28 @@ invCont.buildAllVehicles = async function (req, res, next) {
  *  Build inventory by classification view
  * ************************** */
 invCont.buildByClassificationId = async function (req, res, next) {
-    const classification_id = req.params.classificationID
-    const data = await invModel.getInventoryByClassificationId(classification_id)
-    const grid = await utilities.buildClassificationGrid(data)
-    let nav = await utilities.getNav()
-    const className = data[0].classification_name
-    res.render("./inventory/classification", {
-        title: className + " vehicles",
-        nav,
-        grid,
-    })
+  const classification_id = req.params.classificationID
+  // Parse sort/filter params from query string
+  const order = req.query.order || "newest_listing";
+  const enablePrice = req.query.enablePrice === "on";
+  const minPrice = enablePrice ? parseFloat(req.query.minPrice) : null;
+  const maxPrice = enablePrice ? parseFloat(req.query.maxPrice) : null;
+  const enableMiles = req.query.enableMiles === "on";
+  const minMiles = enableMiles ? parseInt(req.query.minMiles) : null;
+  const maxMiles = enableMiles ? parseInt(req.query.maxMiles) : null;
+
+  // TODO: Pass these params to the model (to be implemented)
+  const data = await invModel.getInventoryByClassificationId(classification_id, {
+    order, minPrice, maxPrice, minMiles, maxMiles
+  });
+  const grid = await utilities.buildClassificationGrid(data)
+  let nav = await utilities.getNav()
+  const className = data[0] ? data[0].classification_name : "";
+  res.render("./inventory/classification", {
+    title: className + " vehicles",
+    nav,
+    grid,
+  })
 }
 
 /* ***************************

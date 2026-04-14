@@ -10,16 +10,35 @@ async function getClassifications(){
 /* ***************************
  *  Get all inventory items and classification_name by classification_id
  * ************************** */
-async function getInventoryByClassificationId(classification_id) {
+async function getInventoryByClassificationId(classification_id, options = {}) {
     try {
-        const data = await pool.query(
-            `SELECT * FROM public.inventory AS i
+        let sql = `SELECT * FROM public.inventory AS i
             JOIN public.classification AS c
             ON i.classification_id = c.classification_id
-            WHERE i.classification_id = $1`,
-            [classification_id]
-        )
-        return data.rows
+            WHERE i.classification_id = $1`;
+        let params = [classification_id];
+        let idx = 2;
+        // Filtering
+        if (options.minPrice != null) {
+            sql += ` AND i.inv_price >= $${idx++}`;
+            params.push(options.minPrice);
+        }
+        if (options.maxPrice != null) {
+            sql += ` AND i.inv_price <= $${idx++}`;
+            params.push(options.maxPrice);
+        }
+        if (options.minMiles != null) {
+            sql += ` AND i.inv_miles >= $${idx++}`;
+            params.push(options.minMiles);
+        }
+        if (options.maxMiles != null) {
+            sql += ` AND i.inv_miles <= $${idx++}`;
+            params.push(options.maxMiles);
+        }
+        // Sorting
+        sql += getOrderByClause(options.order);
+        const data = await pool.query(sql, params);
+        return data.rows;
     } catch (error) {
         console.error("getclassificationsbyid error: " + error)
     }
@@ -28,16 +47,58 @@ async function getInventoryByClassificationId(classification_id) {
 /* ***************************
  *  Get all inventory items with classification_name (for All Vehicles page)
  * ************************** */
-async function getAllInventoryWithClassification() {
+async function getAllInventoryWithClassification(options = {}) {
     try {
-        const data = await pool.query(
-            `SELECT * FROM public.inventory AS i
+        let sql = `SELECT * FROM public.inventory AS i
             JOIN public.classification AS c
-            ON i.classification_id = c.classification_id`
-        )
-        return data.rows
+            ON i.classification_id = c.classification_id WHERE 1=1`;
+        let params = [];
+        let idx = 1;
+        // Filtering
+        if (options.minPrice != null) {
+            sql += ` AND i.inv_price >= $${idx++}`;
+            params.push(options.minPrice);
+        }
+        if (options.maxPrice != null) {
+            sql += ` AND i.inv_price <= $${idx++}`;
+            params.push(options.maxPrice);
+        }
+        if (options.minMiles != null) {
+            sql += ` AND i.inv_miles >= $${idx++}`;
+            params.push(options.minMiles);
+        }
+        if (options.maxMiles != null) {
+            sql += ` AND i.inv_miles <= $${idx++}`;
+            params.push(options.maxMiles);
+        }
+        // Sorting
+        sql += getOrderByClause(options.order);
+        const data = await pool.query(sql, params);
+        return data.rows;
     } catch (error) {
         console.error("getAllInventoryWithClassification error: " + error)
+    }
+}
+// Helper for ORDER BY clause
+function getOrderByClause(order) {
+    switch (order) {
+        case "oldest_listing":
+            return " ORDER BY i.inv_id ASC";
+        case "lowest_price":
+            return " ORDER BY i.inv_price ASC, i.inv_id DESC";
+        case "highest_price":
+            return " ORDER BY i.inv_price DESC, i.inv_id DESC";
+        case "name_asc":
+            return " ORDER BY i.inv_make ASC, i.inv_model ASC, i.inv_id DESC";
+        case "name_desc":
+            return " ORDER BY i.inv_make DESC, i.inv_model DESC, i.inv_id DESC";
+        case "newest_vehicle":
+            return " ORDER BY i.inv_year DESC, i.inv_id DESC";
+        case "oldest_vehicle":
+            return " ORDER BY i.inv_year ASC, i.inv_id DESC";
+        case "newest_listing":
+        default:
+            return " ORDER BY i.inv_id DESC";
     }
 }
 

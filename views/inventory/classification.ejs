@@ -1,42 +1,50 @@
 <!-- Title and Sort Button -->
-<div style="display: flex; justify-content: space-between; align-items: center;">
+<div id="classification-header">
     <% if (title) { %>
         <h1><%= title %></h1>
     <% } else { res.redirect('/') } %>
-    <button id="sortBtn" type="button" style="margin-left:auto;">Sort Vehicles</button>
+        <button id="sortBtn" type="button">
+            <span class="sortBtn-large">Sort Vehicles</span>
+            <span class="sortBtn-small">Sort</span>
+        </button>
 </div>
 
 <!-- Sort/Filter Menu (hidden by default) -->
-<form id="sortMenu" method="get" style="display:none; border:1px solid #ccc; padding:1em; margin-bottom:1em; background:#f9f9f9; border-radius:8px; max-width:500px; float:right;">
-    <h3>Sort & Filter Vehicles</h3>
-    <!-- Order -->
-    <label for="order">Order:</label>
-    <select name="order" id="order">
-        <option value="newest_listing">Newest Listing</option>
-        <option value="oldest_listing">Oldest Listing</option>
-        <option value="lowest_price">Lowest Price</option>
-        <option value="highest_price">Highest Price</option>
-        <option value="name_asc">Name (A-Z)</option>
-        <option value="name_desc">Name (Z-A)</option>
-        <option value="newest_vehicle">Newest Vehicles</option>
-        <option value="oldest_vehicle">Oldest Vehicles</option>
-    </select>
-    <br><br>
-    <!-- Price Filter -->
-    <input type="checkbox" id="enablePrice" name="enablePrice">
-    <label for="enablePrice"><strong>Price:</strong></label>
-    <input type="number" name="minPrice" id="minPrice" placeholder="Min" step="0.01" disabled>
-    <input type="number" name="maxPrice" id="maxPrice" placeholder="Max" step="0.01" disabled>
-    <br><br>
-    <!-- Miles Filter -->
-    <input type="checkbox" id="enableMiles" name="enableMiles">
-    <label for="enableMiles"><strong>Miles:</strong></label>
-    <input type="number" name="minMiles" id="minMiles" placeholder="Min" step="1" disabled>
-    <input type="number" name="maxMiles" id="maxMiles" placeholder="Max" step="1" disabled>
-    <br><br>
-    <span id="sortError" style="color:red;"></span>
-    <button type="submit">Apply Search Settings</button>
-    <button type="button" id="closeSortMenu">Cancel</button>
+<form id="sort-inventory-form" method="get">
+    <h2>Sort & Filter Vehicles</h2>
+        <!-- Order -->
+        <div class="sort-form-section">
+            <label for="order">Order:</label>
+            <select name="order" id="order">
+                    <option value="newest_listing">Newest Listing</option>
+                    <option value="oldest_listing">Oldest Listing</option>
+                    <option value="lowest_price">Lowest Price</option>
+                    <option value="highest_price">Highest Price</option>
+                    <option value="name_asc">Name (A-Z)</option>
+                    <option value="name_desc">Name (Z-A)</option>
+                    <option value="newest_vehicle">Newest Vehicles</option>
+                    <option value="oldest_vehicle">Oldest Vehicles</option>
+            </select>
+        </div>
+        <!-- Price Filter -->
+        <div class="sort-form-section">
+            <input type="checkbox" id="enablePrice" name="enablePrice">
+            <label for="enablePrice"><strong>Price:</strong></label>
+            <input type="number" name="minPrice" id="minPrice" placeholder="Min" step="1000" min="0" disabled>
+            <input type="number" name="maxPrice" id="maxPrice" placeholder="Max" step="1000" min="0" disabled>
+        </div>
+        <!-- Miles Filter -->
+        <div class="sort-form-section">
+            <input type="checkbox" id="enableMiles" name="enableMiles">
+            <label for="enableMiles"><strong>Miles:</strong></label>
+            <input type="number" name="minMiles" id="minMiles" placeholder="Min" step="1000" min="0" disabled>
+            <input type="number" name="maxMiles" id="maxMiles" placeholder="Max" step="1000" min="0" disabled>
+        </div>
+        <span id="sortError" style="color:red;"></span>
+        <div class="sort-inventory-form-buttons">
+            <button type="submit">Apply Search Settings</button>
+            <button type="button" id="closeSortMenu">Cancel</button>
+        </div>
 </form>
 
 <!-- Message Block (will be added later) -->
@@ -45,41 +53,4 @@
 <!-- Inventory Items Display -->
 <%- grid%>
 
-<script>
-// Toggle sort menu
-document.getElementById('sortBtn').onclick = function() {
-    document.getElementById('sortMenu').style.display = 'block';
-}
-document.getElementById('closeSortMenu').onclick = function(e) {
-    e.preventDefault();
-    document.getElementById('sortMenu').style.display = 'none';
-}
-// Enable/disable price fields
-document.getElementById('enablePrice').onchange = function() {
-    document.getElementById('minPrice').disabled = !this.checked;
-    document.getElementById('maxPrice').disabled = !this.checked;
-}
-// Enable/disable miles fields
-document.getElementById('enableMiles').onchange = function() {
-    document.getElementById('minMiles').disabled = !this.checked;
-    document.getElementById('maxMiles').disabled = !this.checked;
-}
-// Basic client-side validation
-document.getElementById('sortMenu').onsubmit = function(e) {
-    let err = '';
-    if(document.getElementById('enablePrice').checked) {
-        let min = parseFloat(document.getElementById('minPrice').value);
-        let max = parseFloat(document.getElementById('maxPrice').value);
-        if(!isNaN(min) && !isNaN(max) && min > max) err += 'Min price must be less than max price. ';
-    }
-    if(document.getElementById('enableMiles').checked) {
-        let min = parseInt(document.getElementById('minMiles').value);
-        let max = parseInt(document.getElementById('maxMiles').value);
-        if(!isNaN(min) && !isNaN(max) && min > max) err += 'Min miles must be less than max miles.';
-    }
-    if(err) {
-        document.getElementById('sortError').textContent = err;
-        e.preventDefault();
-    }
-}
-</script>
+<script src="/js/classification.js"></script>

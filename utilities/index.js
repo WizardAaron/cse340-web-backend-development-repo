@@ -6,27 +6,28 @@ const Util = {}
 /* ************************
  * Constructs the nav HTML unordered list
  ************************** */
-Util.getNav = async function (req, res, next) {
-    let data = await invModel.getClassifications()
-    let list = "<ul>"
-    list += '<li><a href="/" title="Home page">Home</a></li>'
-    // Insert All Vehicles link after Home
-    list += '<li><a href="/inv/type/all" title="See all vehicles">All Vehicles</a></li>'
-    // Add the rest of the classifications
+Util.getNav = async function (req) {
+    let data = await invModel.getClassifications();
+    let currentPath = req && req.originalUrl ? req.originalUrl.split('?')[0] : '';
+    let links = [
+        { href: '/', text: 'Home', title: 'Home page' },
+        { href: '/inv/type/all', text: 'All Vehicles', title: 'See all vehicles' }
+    ];
     data.rows.forEach((row) => {
-        list += "<li>"
-        list +=
-            '<a href="/inv/type/' +
-            row.classification_id +
-            '" title="See our inventory of ' +
-            row.classification_name +
-            ' vehicles">' +
-            row.classification_name +
-            "</a>"
-        list += "</li>"
-    })
-    list += "</ul>"
-    return list
+        links.push({
+            href: '/inv/type/' + row.classification_id,
+            text: row.classification_name,
+            title: `See our inventory of ${row.classification_name} vehicles`
+        });
+    });
+    let list = '<ul>';
+    links.forEach(link => {
+        // Mark as active if currentPath matches link.href exactly or starts with link.href + '/'
+        let isActive = (currentPath === link.href) || (currentPath.startsWith(link.href + '/'));
+        list += `<li><a href="${link.href}" title="${link.title}"${isActive ? ' class="active"' : ''}>${link.text}</a></li>`;
+    });
+    list += '</ul>';
+    return list;
 }
 
 /* **************************************

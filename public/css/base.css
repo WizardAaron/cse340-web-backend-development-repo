@@ -88,6 +88,12 @@ img {
   border-bottom: var(--border1);
 }
 
+#nav-bar a.active {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  font-weight: bold;
+}
+
 .navigation > ul {
   list-style: none;
   display: grid;
@@ -521,7 +527,7 @@ img {
   box-shadow: 0 0 0 1px var(--shadow-grey);
 }
 
-/* Add Classification Form */
+/* Add Classification Forms */
 #add-classification-form,
 #add-inventory-form,
 #edit-inventory-form,
@@ -534,6 +540,45 @@ img {
   margin: 0 auto;
 }
 
+#classification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#sortBtn {
+  margin-left: auto;
+}
+
+#sortBtn[aria-label="Close sort menu"] {
+  padding: 10px 16px;
+}
+
+#sortBtn .sortBtn-large {
+  display: none;
+}
+
+#sortBtn .sortBtn-small {
+  display: inline;
+}
+
+#sortBtn:hover {
+  background-color: var(--sky-aqua);
+  color: var(--shadow-grey);
+  box-shadow: 0 0 0 1px var(--shadow-grey);
+}
+
+#sort-inventory-form {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  border: var(--border2);
+  border-radius: var(--border-radius-half);
+  background-color: var(--light-grey);
+  margin: 0 auto;
+  display: none;
+}
+
 #add-classification-form form,
 #add-inventory-form form,
 #edit-inventory-form form,
@@ -543,10 +588,17 @@ img {
   gap: 10px;
 }
 
+#sort-inventory-form h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.4em;
+}
+
 #add-classification-form form label,
 #add-inventory-form form label,
 #edit-inventory-form form label,
-#delete-inventory-form form label {
+#delete-inventory-form form label,
+#sort-inventory-form label {
   font-family: var(--heading-font);
   font-weight: bold;
 }
@@ -558,11 +610,23 @@ img {
 #add-inventory-form form textarea,
 #edit-inventory-form form textarea,
 #add-inventory-form form select,
-#edit-inventory-form form select {
+#edit-inventory-form form select,
+#sort-inventory-form input,
+#sort-inventory-form select {
   padding: 10px;
   font-size: 1em;
   border: var(--border2);
   border-radius: var(--border-radius-quarter);
+}
+
+@media (max-width: 40.3rem) {
+  #sort-inventory-form select,
+  #sort-inventory-form input[type="number"] {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px;
+  }
 }
 
 #add-inventory-form form textarea,
@@ -572,10 +636,47 @@ img {
   font-family: var(--text-font);
 }
 
+#sort-inventory-form input:disabled {
+  border-color: #999;
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+#sort-inventory-form input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: var(--border1);
+  border-radius: 4px;
+  background: #fff;
+  vertical-align: middle;
+  position: relative;
+  cursor: pointer;
+  margin-top: 1px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+#sort-inventory-form input[type="checkbox"]:checked {
+  background-color: var(--sky-aqua);
+  border-color: #999;
+}
+
+#sort-inventory-form input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  left: 7px; top: 3px;
+  width: 6px; height: 12px;
+  border: solid var(--shadow-grey);
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
 #add-classification-form form button,
 #add-inventory-form form button,
 #edit-inventory-form form button,
-#delete-inventory-form form button {
+#delete-inventory-form form button,
+#sort-inventory-form button,
+#sortBtn {
   padding: 10px;
   font-size: 1em;
   font-family: var(--heading-font);
@@ -584,13 +685,39 @@ img {
   border: var(--border2);
   border-radius: var(--border-radius2);
   cursor: pointer;
-  margin-top: 5px;
+}
+
+#sort-inventory-form .sort-form-section {
+  margin-bottom: 18px;
+}
+
+#sort-inventory-form .sort-form-section:last-of-type {
+  margin-bottom: 0;
+}
+
+#sort-inventory-form button {
+  display: block;
+  margin: 0 auto 0 auto;
+}
+
+#sort-inventory-form .sort-inventory-form-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+#sort-inventory-form .sort-inventory-form-buttons button[type=submit] {
+  margin-right: 2.5px;
+}
+
+#sort-inventory-form .sort-inventory-form-buttons button[id=closeSortMenu] {
+  margin-left: 2.5px;
 }
 
 #add-classification-form form button:hover,
 #add-inventory-form form button:hover,
 #edit-inventory-form form button:hover,
-#delete-inventory-form form button:hover {
+#delete-inventory-form form button:hover,
+#sort-inventory-form button:hover {
   background-color: var(--sky-aqua);
   color: var(--shadow-grey);
   box-shadow: 0 0 0 1px var(--shadow-grey);
@@ -726,6 +853,31 @@ img {
 
   #login-form {
     width: 100%;
+  }
+
+  #sortBtn .sortBtn-large {
+    display: inline;
+  }
+
+  #sortBtn .sortBtn-small {
+    display: none;
+  }
+
+  #sort-inventory-form select,
+  #sort-inventory-form input[type="number"] {
+    display: inline-block;
+    width: auto;
+    margin-top: 0;
+    max-width: none;
+    vertical-align: middle;
+  }
+
+  #sort-inventory-form select {
+    max-width: 200px;
+  }
+
+  #sort-inventory-form input[type=number] {
+    max-width: 135px;
   }
 
   #add-inventory-form,

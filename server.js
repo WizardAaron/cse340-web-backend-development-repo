@@ -9,7 +9,6 @@ const express = require("express")
 const env = require("dotenv").config()
 const app = express()
 const expressLayouts = require("express-ejs-layouts")
-const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
 const accountRoute = require("./routes/accountRoute")
@@ -22,6 +21,8 @@ const cookieParser = require("cookie-parser")
 /* ***********************
  * Middleware
  * ************************/
+// Serve static files from public directory
+app.use(express.static("public"));
 app.use(session({
   store: new (require('connect-pg-simple')(session))({
     createTableIfMissing: true,
@@ -85,11 +86,12 @@ app.use(async (err, req, res, next) => {
  * Local Server Information
  * Values from .env (environment) file
  *************************/
-const port = process.env.PORT || 3000;
+const port = process.env.PORT
+const host = process.env.HOST
 
 /* ***********************
  * Log statement to confirm server operation
  *************************/
 app.listen(port, () => {
-  console.log(`app listening on port ${port}`)
+  console.log(`app listening on ${host}:${port}`)
 })
